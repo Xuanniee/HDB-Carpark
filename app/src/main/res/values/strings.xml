@@ -11,6 +11,9 @@
     <string name="user_profile_pic_desc">User Profile Picture</string>
     <string name="john">John Lim</string>
     <string name="points">\"Points: \"</string>
+    <string name="mapbox_access_token">pk.eyJ1IjoiaWxvdmVhbmdwYW8iLCJhIjoiY2xjeWtvOHkzMDQ4djNwbW15cmVmZXlodSJ9.1zTfhfuumUT3qaOTGvoLpw</string>
+    <string name="carpark_locator_desc">Carpark Locator</string>
+
     <string name="fault_reporting_flavour">Report a Fault</string>
     <string name="success_screen_desc">Success</string>
 </resources>

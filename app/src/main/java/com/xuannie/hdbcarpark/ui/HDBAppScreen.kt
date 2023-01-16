@@ -31,6 +31,7 @@ enum class HdbCarparkScreen(@StringRes val title: Int) {
     ParkingAvail(title = R.string.carpark_avail_title),
     FaultReporting(title = R.string.fault_reporting_flavour),
     Submission(title = R.string.success_screen_desc)
+    carparkLocator(title = R.string.carpark_locator_desc),
 }
 
 /**
@@ -177,22 +178,39 @@ fun HdbNavigationDrawer(
             )
             Text("Parking Availability")
         }
+        Button(
+            onClick = {
+                // Navigate to the Desired Route
+                navController.navigate(HdbCarparkScreen.carparkLocator.name)
+                // Close the App Drawer
+                scope.launch { scaffoldState.drawerState.close() }
+            },
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(all = 5.dp)
+        ) {
+            Image(
+                imageVector = Icons.Filled.Home,
+                contentDescription = null,
+            )
+            Text("Parking Availability")
+        }
 
         Spacer(modifier = Modifier.weight(1f))
 
-            Button(
-                onClick = {
-                    // Navigate to the Desired Route
-                    navController.navigate(HdbCarparkScreen.Login.name)
-                    // Close the App Drawer
-                    scope.launch { scaffoldState.drawerState.close() }
-                },
-                modifier = modifier
-                    .fillMaxWidth()
-                    .padding(all = 5.dp)
-            ) {
-                Text(text = "Log Out")
-            }
+        Button(
+            onClick = {
+                // Navigate to the Desired Route
+                navController.navigate(HdbCarparkScreen.Login.name)
+                // Close the App Drawer
+                scope.launch { scaffoldState.drawerState.close() }
+            },
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(all = 5.dp)
+        ) {
+            Text(text = "Log Out")
+        }
 
 
 
@@ -312,6 +330,9 @@ fun HdbCarparkApp(
                     scope = scope,
                     scaffoldState = scaffoldState
                 )
+            }
+            composable(route = HdbCarparkScreen.carparkLocator.name) {
+                MapboxScreen()
             }
 
             composable(route = HdbCarparkScreen.FaultReporting.name) {
