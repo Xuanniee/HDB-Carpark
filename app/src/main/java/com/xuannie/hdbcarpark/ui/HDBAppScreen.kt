@@ -19,6 +19,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.xuannie.hdbcarpark.R
+import com.xuannie.hdbcarpark.ui.screens.AppViewModel
 import com.xuannie.hdbcarpark.ui.screens.DefaultScreen
 import com.xuannie.hdbcarpark.ui.screens.LoginScreen
 import com.xuannie.hdbcarpark.ui.theme.Grey900
@@ -201,6 +202,7 @@ fun HdbNavigationDrawer(
 fun HdbCarparkApp(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
+    viewModel: AppViewModel
 ) {
     // Save Current Back Stack Entry
     val backStackEntry by navController.currentBackStackEntryAsState()
@@ -217,6 +219,7 @@ fun HdbCarparkApp(
         scaffoldState = scaffoldState,
         drawerContent = {
             // TODO Add a Composable for Navigation
+            viewModel.determineUserQuery("Test")
             HdbNavigationDrawer(
                 scope = scope,
                 navController = navController,
