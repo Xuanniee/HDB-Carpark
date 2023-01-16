@@ -61,7 +61,8 @@ fun LoginScreen(
                 Icon(
                     imageVector = Icons.Filled.Email,
                     contentDescription = null,
-                    modifier = Modifier.padding(10.dp)
+                    modifier = Modifier.padding(10.dp),
+                    tint = Color.Black
                 )
             },
             // Cancel Button to delete all Input
@@ -101,7 +102,8 @@ fun LoginScreen(
                 Icon(
                     imageVector = Icons.Filled.Password,
                     contentDescription = null,
-                    modifier = Modifier.padding(10.dp)
+                    modifier = Modifier.padding(10.dp),
+                    tint = Color.Black
                 )
             },
             // Cancel Button to delete all Input
