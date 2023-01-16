@@ -2,6 +2,7 @@ package com.xuannie.hdbcarpark.ui.screens
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -26,8 +27,41 @@ import kotlinx.coroutines.launch
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.composed
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
 
+@Composable
+fun RowWithThreeRectangles() {
+    Row(modifier = Modifier.fillMaxWidth()
+    ) {
+        Rectangle(color = Color.Red)
+        Rectangle(modifier = Modifier.weight(0.3f)
+            .height(64.dp),
+            color = Color.Blue)
+        Rectangle(modifier = Modifier.weight(0.7f),
+            color = Color.Green)
+    }
+}
+
+@Composable
+fun Rectangle(color: Color,
+              modifier: Modifier = Modifier) {
+    Box(
+        modifier = modifier.composed {
+            size(32.dp)
+                .clip(RectangleShape)
+                .background(color)
+        }
+    )
+}
+
+@Composable
+fun CarButton() {
+
+}
 
 @Composable
 fun ParkingSlotScreen(
@@ -52,7 +86,7 @@ fun ParkingSlotScreen(
         0 -> {
             Box(modifier= Modifier.padding(vertical = 40.dp)) {
 
-                Image(painter = painterResource(id = R.drawable.singpass_logo), contentDescription = "Background")
+                //Image(painter = painterResource(id = R.drawable.singpass_logo), contentDescription = "Background")
                 Row(
                     verticalAlignment = Alignment.Top,
                     horizontalArrangement = Arrangement.SpaceBetween,
@@ -97,5 +131,45 @@ fun ParkingSlotScreen(
 
         }
     }
+
+    Column (
+        //modifier = modifier
+         //   .padding(20.dp),
+        verticalArrangement = Arrangement.SpaceAround
+    ) {
+
+        //Spacer(modifier = modifier.height(70.dp))
+
+
+        Rectangle(modifier = Modifier.height(13.dp)
+            .width(120.dp),
+            color = Color.Gray)
+        Spacer(modifier = modifier.height(70.dp))
+        Rectangle(modifier = Modifier.height(13.dp)
+            .width(120.dp),
+            color = Color.Gray)
+        Spacer(modifier = modifier.height(70.dp))
+        Rectangle(modifier = Modifier.height(13.dp)
+            .width(120.dp),
+            color = Color.Gray)
+        Spacer(modifier = modifier.height(70.dp))
+        Rectangle(modifier = Modifier.height(13.dp)
+            .width(120.dp),
+            color = Color.Gray)
+        Spacer(modifier = modifier.height(70.dp))
+        Rectangle(modifier = Modifier.height(13.dp)
+            .width(120.dp),
+            color = Color.Gray)
+        Spacer(modifier = modifier.height(70.dp))
+        Rectangle(modifier = Modifier.height(13.dp)
+            .width(120.dp),
+            color = Color.Gray)
+        Spacer(modifier = modifier.height(70.dp))
+        Rectangle(modifier = Modifier.height(13.dp)
+            .width(120.dp),
+            color = Color.Gray)
+
+    }
+
     // Hello
 }
