@@ -20,6 +20,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.xuannie.hdbcarpark.R
 import com.xuannie.hdbcarpark.ui.screens.DefaultScreen
+import com.xuannie.hdbcarpark.ui.screens.LoginScreen
 import com.xuannie.hdbcarpark.ui.theme.Grey900
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -27,7 +28,7 @@ import kotlinx.coroutines.launch
 // Enum Class for App Routes
 enum class HdbCarparkScreen(@StringRes val title: Int) {
     Default(title = R.string.app_name),
-
+    Login(title = R.string.Login)
 }
 
 /**
@@ -239,12 +240,16 @@ fun HdbCarparkApp(
         // NavHost Composable for Navigating between Screens
         NavHost(
             navController = navController,
-            startDestination = HdbCarparkScreen.Default.name,
+            startDestination = HdbCarparkScreen.Login.name,
             modifier = modifier.padding(innerPadding)
         ) {
             // Routes for Every Screen in the App
 
-            // 1. Default Screen
+            // 1. Login Page
+            composable(route = HdbCarparkScreen.Login.name) {
+                LoginScreen(navController = navController, modifier = modifier)
+            }
+            // 2. Default Screen
             composable(route = HdbCarparkScreen.Default.name) {
                 DefaultScreen(navController = navController)
             }

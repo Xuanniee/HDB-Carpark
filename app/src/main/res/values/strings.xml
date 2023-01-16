@@ -3,4 +3,8 @@
     <string name="menu_desc">Flavor Text for Navigation Menu</string>
     <string name="home_nav_desc">Homepage</string>
     <string name="navbar_desc">Navigation Menu</string>
+    <string name="login_email_text">Email</string>
+    <string name="login_pw_title">Password</string>
+    <string name="singpass_login_desc">Log in using Singpass.</string>
+    <string name="Login">Login</string>
 </resources>
