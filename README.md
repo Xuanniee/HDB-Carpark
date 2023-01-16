@@ -1,7 +1,7 @@
 # HDB Carpark Application [Android]
 
 ## Project Description
-<img src="appImages/`Default Page`.png" alt="Login" width="30%">
+<img src="appImages/Default.png" alt="Login" width="30%">
 HDB Carpark Application is a simple Android Application designed to entice residents to help out in the maintenance of their neighbourhood carparks, by reporting on faults that they saw. They would then be rewarded for their efforts with points that can be accumulated. These points can then be used to book a parking slot for a month for the user.
 
 ## Content
