@@ -1,13 +1,14 @@
 package com.xuannie.hdbcarpark.ui.screens
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import android.widget.Space
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Bookmark
+import androidx.compose.material.icons.filled.Cabin
+import androidx.compose.material.icons.filled.CarRental
+import androidx.compose.material.icons.filled.History
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,37 +32,75 @@ fun DefaultScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier.fillMaxWidth()
     ) {
-        // App Name
-        Text(
-            text = stringResource(id = R.string.app_name),
-            style = MaterialTheme.typography.h4,
-            fontWeight = FontWeight.SemiBold,
+        Spacer(modifier = modifier.height(20.dp))
+        // User Profile Picture
+        Image(
+            painter = painterResource(id = R.drawable.profile_picture),
+            contentDescription = stringResource(R.string.user_profile_pic_desc),
             modifier = modifier
-                .fillMaxWidth()
-                .padding(10.dp),
-            textAlign = TextAlign.Center
+                .height(200.dp)
+                .widthIn(200.dp)
+                .padding(20.dp)
         )
 
+        // User Name
         Text(
-            text = "Hi this is HDB App",
+            text = stringResource(id = R.string.john),
             style = MaterialTheme.typography.h6,
-            fontWeight = FontWeight.SemiBold,
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(10.dp),
-            textAlign = TextAlign.Center
+            fontWeight = FontWeight.SemiBold
         )
 
-        // Tutorial
-        Text(
-            text = "This is the Tutorial!!!",
-            style = MaterialTheme.typography.body2,
-            fontWeight = FontWeight.Normal,
-            textAlign = TextAlign.Start,
-            maxLines = 7,
-            modifier = modifier.padding(5.dp)
-        )
+        // User Points TODO Replace with SQL Implementations
+        Row(
+            modifier = modifier.padding(start = 10.dp, end = 10.dp)
+        ){
+            Text(
+                text = "Points: 300",
+                style = MaterialTheme.typography.body2,
+                fontWeight = FontWeight.SemiBold
 
+            )
+            
+        }
+
+        Spacer(modifier = modifier.height(20.dp))
+        
+        // Book Spots for Carpark
+        Button(onClick = { /*TODO*/ }) {
+            Icon(imageVector = Icons.Filled.Bookmark, contentDescription = "Chope your Parking Spot")
+            Text(
+                text = "Chope your Parking Spot here!!!",
+                modifier = modifier
+                    .width(250.dp)
+                    .padding(start = 10.dp, end = 10.dp),
+                maxLines = 1
+            )
+        }
+        
+        // Check Carpark
+        Button(onClick = { /*TODO*/ }) {
+            Icon(imageVector = Icons.Filled.CarRental, contentDescription = "Check Carpark")
+            Text(
+                text = "Check the Carpark Status",
+                modifier = modifier
+                    .width(250.dp)
+                    .padding(start = 10.dp, end = 10.dp),
+                maxLines = 1
+            )
+        }
+        
+        // Activity History
+        Button(onClick = { /*TODO*/ }) {
+            Icon(imageVector = Icons.Filled.History, contentDescription = "History")
+            Text(
+                text = "Activity History",
+                modifier = modifier
+                    .width(250.dp)
+                    .padding(start = 10.dp, end = 10.dp),
+                maxLines = 1
+            )
+        }
+        
     }
 
 }
