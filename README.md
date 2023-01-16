@@ -11,7 +11,7 @@ HDB Carpark implements an authentication system by allowing users to log into th
 
 
 ### 2. Nearby Carparks through MapBox
-<img src="appImages/`Nearby Carpark`.png" alt="Login" width="30%">
+<img src="appImages/Nearby.png" alt="Login" width="30%">
 Using Mapbox API, HDB Carpark can easily determine the location of the user after express permission has been obtained, allowing us to determine which carpark in Singapore requires maintenance.
 
 ### 3. Booking of Carpark Slots Incentive
