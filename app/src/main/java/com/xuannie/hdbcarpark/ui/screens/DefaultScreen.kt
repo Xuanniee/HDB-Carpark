@@ -91,17 +91,17 @@ fun DefaultScreen(
             )
         }
         
-        // Activity History
-        Button(onClick = { /*TODO*/ }) {
-            Icon(imageVector = Icons.Filled.History, contentDescription = "History")
-            Text(
-                text = "Activity History",
-                modifier = modifier
-                    .width(250.dp)
-                    .padding(start = 10.dp, end = 10.dp),
-                maxLines = 1
-            )
-        }
+//        // Activity History
+//        Button(onClick = { /*TODO*/ }) {
+//            Icon(imageVector = Icons.Filled.History, contentDescription = "History")
+//            Text(
+//                text = "Activity History",
+//                modifier = modifier
+//                    .width(250.dp)
+//                    .padding(start = 10.dp, end = 10.dp),
+//                maxLines = 1
+//            )
+//        }
 
         // Report a Fault
         Button(

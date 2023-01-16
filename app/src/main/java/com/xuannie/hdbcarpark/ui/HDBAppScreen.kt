@@ -193,7 +193,7 @@ fun HdbNavigationDrawer(
                 imageVector = Icons.Filled.Home,
                 contentDescription = null,
             )
-            Text("Parking Availability")
+            Text("Carpa")
         }
 
         Spacer(modifier = Modifier.weight(1f))
