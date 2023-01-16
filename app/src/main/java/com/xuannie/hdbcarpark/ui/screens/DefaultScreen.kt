@@ -1,7 +1,6 @@
 package com.xuannie.hdbcarpark.ui.screens
 
 import android.widget.Space
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -20,6 +19,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.xuannie.hdbcarpark.R
 import com.xuannie.hdbcarpark.ui.HdbCarparkScreen
+import androidx.compose.foundation.Image
+import androidx.compose.runtime.NonRestartableComposable
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.layout.ContentScale
 
 @Composable
 fun DefaultScreen(
@@ -32,10 +35,10 @@ fun DefaultScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier.fillMaxWidth()
     ) {
-        Spacer(modifier = modifier.height(20.dp))
+
         // User Profile Picture
         Image(
-            painter = painterResource(id = R.drawable.profile_picture),
+            painter = painterResource(R.drawable.profile_picture),
             contentDescription = stringResource(R.string.user_profile_pic_desc),
             modifier = modifier
                 .height(200.dp)
@@ -78,7 +81,9 @@ fun DefaultScreen(
         }
         
         // Check Carpark
-        Button(onClick = { /*TODO*/ }) {
+        Button(onClick = {
+            navController.navigate(HdbCarparkScreen.carparkLocator.name)
+        }) {
             Icon(imageVector = Icons.Filled.CarRental, contentDescription = "Check Carpark")
             Text(
                 text = "Check the Carpark Status",
@@ -104,3 +109,4 @@ fun DefaultScreen(
     }
 
 }
+

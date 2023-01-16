@@ -19,10 +19,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.xuannie.hdbcarpark.R
-import com.xuannie.hdbcarpark.ui.screens.AppViewModel
-import com.xuannie.hdbcarpark.ui.screens.DefaultScreen
-import com.xuannie.hdbcarpark.ui.screens.LoginScreen
-import com.xuannie.hdbcarpark.ui.screens.ParkingSlotScreen
+import com.xuannie.hdbcarpark.ui.screens.*
 import com.xuannie.hdbcarpark.ui.theme.Grey900
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -31,7 +28,8 @@ import kotlinx.coroutines.launch
 enum class HdbCarparkScreen(@StringRes val title: Int) {
     Default(title = R.string.app_name),
     Login(title = R.string.Login),
-    ParkingAvail(title = R.string.carpark_avail_title)
+    ParkingAvail(title = R.string.carpark_avail_title),
+    carparkLocator(title = R.string.carpark_locator_desc),
 }
 
 /**
@@ -168,22 +166,39 @@ fun HdbNavigationDrawer(
             )
             Text("Parking Availability")
         }
+        Button(
+            onClick = {
+                // Navigate to the Desired Route
+                navController.navigate(HdbCarparkScreen.carparkLocator.name)
+                // Close the App Drawer
+                scope.launch { scaffoldState.drawerState.close() }
+            },
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(all = 5.dp)
+        ) {
+            Image(
+                imageVector = Icons.Filled.Home,
+                contentDescription = null,
+            )
+            Text("Parking Availability")
+        }
 
         Spacer(modifier = Modifier.weight(1f))
 
-            Button(
-                onClick = {
-                    // Navigate to the Desired Route
-                    navController.navigate(HdbCarparkScreen.Login.name)
-                    // Close the App Drawer
-                    scope.launch { scaffoldState.drawerState.close() }
-                },
-                modifier = modifier
-                    .fillMaxWidth()
-                    .padding(all = 5.dp)
-            ) {
-                Text(text = "Log Out")
-            }
+        Button(
+            onClick = {
+                // Navigate to the Desired Route
+                navController.navigate(HdbCarparkScreen.Login.name)
+                // Close the App Drawer
+                scope.launch { scaffoldState.drawerState.close() }
+            },
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(all = 5.dp)
+        ) {
+            Text(text = "Log Out")
+        }
 
 
 
@@ -291,7 +306,7 @@ fun HdbCarparkApp(
             composable(route = HdbCarparkScreen.Login.name) {
                 LoginScreen(navController = navController, modifier = modifier)
             }
-            // 2. Default Screen
+//             2. Default Screen
             composable(route = HdbCarparkScreen.Default.name) {
                 DefaultScreen(navController = navController)
             }
@@ -302,6 +317,9 @@ fun HdbCarparkApp(
                     scope = scope,
                     scaffoldState = scaffoldState
                 )
+            }
+            composable(route = HdbCarparkScreen.carparkLocator.name) {
+                MapboxScreen()
             }
 
 
