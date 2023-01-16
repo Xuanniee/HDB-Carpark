@@ -22,6 +22,7 @@ import com.xuannie.hdbcarpark.R
 import com.xuannie.hdbcarpark.ui.screens.*
 import com.xuannie.hdbcarpark.ui.theme.Grey900
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 // Enum Class for App Routes
@@ -279,6 +280,9 @@ fun HdbCarparkApp(
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
 
+    // YT Points
+    val points by remember { mutableStateOf(100) }
+
     // Top Navigation Bar
     Scaffold(
         modifier = modifier,
@@ -328,7 +332,9 @@ fun HdbCarparkApp(
                 ParkingSlotScreen(
                     currentScreen = currentScreen,
                     scope = scope,
-                    scaffoldState = scaffoldState
+                    scaffoldState = scaffoldState,
+                    viewModel = viewModel,
+                    points = points
                 )
             }
             composable(route = HdbCarparkScreen.carparkLocator.name) {
