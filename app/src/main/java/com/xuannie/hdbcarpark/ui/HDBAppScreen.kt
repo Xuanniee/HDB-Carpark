@@ -19,10 +19,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.xuannie.hdbcarpark.R
-import com.xuannie.hdbcarpark.ui.screens.AppViewModel
-import com.xuannie.hdbcarpark.ui.screens.DefaultScreen
-import com.xuannie.hdbcarpark.ui.screens.LoginScreen
-import com.xuannie.hdbcarpark.ui.screens.ParkingSlotScreen
+import com.xuannie.hdbcarpark.ui.screens.*
 import com.xuannie.hdbcarpark.ui.theme.Grey900
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -31,7 +28,8 @@ import kotlinx.coroutines.launch
 enum class HdbCarparkScreen(@StringRes val title: Int) {
     Default(title = R.string.app_name),
     Login(title = R.string.Login),
-    ParkingAvail(title = R.string.carpark_avail_title)
+    ParkingAvail(title = R.string.carpark_avail_title),
+    FaultReporting(title = R.string.fault_reporting_flavour)
 }
 
 /**
@@ -302,6 +300,10 @@ fun HdbCarparkApp(
                     scope = scope,
                     scaffoldState = scaffoldState
                 )
+            }
+
+            composable(route = HdbCarparkScreen.FaultReporting.name) {
+                FaultReportingChecklist()
             }
 
 

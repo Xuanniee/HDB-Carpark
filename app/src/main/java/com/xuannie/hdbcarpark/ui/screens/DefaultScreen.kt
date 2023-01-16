@@ -5,10 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Bookmark
-import androidx.compose.material.icons.filled.Cabin
-import androidx.compose.material.icons.filled.CarRental
-import androidx.compose.material.icons.filled.History
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -94,6 +91,22 @@ fun DefaultScreen(
             Icon(imageVector = Icons.Filled.History, contentDescription = "History")
             Text(
                 text = "Activity History",
+                modifier = modifier
+                    .width(250.dp)
+                    .padding(start = 10.dp, end = 10.dp),
+                maxLines = 1
+            )
+        }
+
+        // Report a Fault
+        Button(
+            onClick = {
+                navController.navigate(HdbCarparkScreen.FaultReporting.name)
+            }
+        ) {
+            Icon(imageVector = Icons.Filled.Report, contentDescription = "Report")
+            Text(
+                text = "Report a Fault",
                 modifier = modifier
                     .width(250.dp)
                     .padding(start = 10.dp, end = 10.dp),

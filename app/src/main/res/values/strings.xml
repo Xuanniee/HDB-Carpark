@@ -11,4 +11,5 @@
     <string name="user_profile_pic_desc">User Profile Picture</string>
     <string name="john">John Lim</string>
     <string name="points">\"Points: \"</string>
+    <string name="fault_reporting_flavour">Report a Fault</string>
 </resources>
