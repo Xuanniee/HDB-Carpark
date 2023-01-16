@@ -77,13 +77,46 @@ fun EmptyCarSlot(
     var selected by remember { mutableStateOf(false) }
     val color = if (selected) Color.Red else Color.Green
 
+    val openDialog = remember { mutableStateOf(false) }
 
-    Button(modifier = Modifier.clip(RoundedCornerShape( 15.dp)),onClick = {
-        selected = !selected
-        Log.d("DebugTag2", "${viewModel._pointsUiState.value}")
-        viewModel._pointsUiState.value -= 15
-        Log.d("DebugTag2", "${viewModel._pointsUiState.value}")
-                                                                          },    colors = ButtonDefaults.buttonColors(backgroundColor = color )) {
+    if (openDialog.value) {
+        AlertDialog(
+            onDismissRequest = {
+                openDialog.value = false
+            },
+            title = {
+                Text(text = "Booking Confirmed")
+            },
+            text = {
+                Text(
+                    "You have 200 Points remaining!!"
+                )
+            },
+            buttons = {
+                Row(
+                    modifier = Modifier.padding(all = 8.dp),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Button(
+                        modifier = Modifier.fillMaxWidth(),
+                        onClick = { openDialog.value = false }
+                    ) {
+                        Text("Dismiss")
+                    }
+                }
+            }
+        )
+    }
+
+    Button(
+        modifier = Modifier.clip(RoundedCornerShape(15.dp)),
+        onClick = {
+            selected = !selected
+            viewModel._pointsUiState.value -= 15
+            openDialog.value = true
+        },
+        colors = ButtonDefaults.buttonColors(backgroundColor = color)
+    ) {
         Image(
             painter = painterResource(id = R.drawable.emptycarparkstock),
             contentDescription = "Empty Slot",
@@ -113,6 +146,7 @@ fun ParkingSlotScreen(
     ) {
     // Tab to select parking floor
 //    val points by remember { mutableStateOf(100) }
+
     var state by remember { mutableStateOf(0) }
     val titles = listOf("Floor 1", "Floor 2", "Floor 3")
     TabRow(selectedTabIndex = state) {
@@ -161,9 +195,9 @@ fun ParkingSlotScreen(
                         EmptyCarSlot(viewModel = viewModel)
                         CarparkSeparator()
                         FullCarSlot()
-                        Box( modifier = Modifier.padding(50.dp)){
-                            Text( "Points : " + points.toString())
-                        }
+//                        Box( modifier = Modifier.padding(50.dp)){
+//                            Text( "Points : " + points.toString())
+//                        }
                     }
                 }
             }
