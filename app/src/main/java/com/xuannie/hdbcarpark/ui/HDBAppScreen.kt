@@ -1,20 +1,198 @@
 package com.xuannie.hdbcarpark.ui
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Scaffold
-import androidx.compose.material.rememberScaffoldState
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.twotone.Email
+import androidx.compose.material.icons.twotone.Home
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import com.xuannie.hdbcarpark.R
+import com.xuannie.hdbcarpark.ui.screens.DefaultScreen
+import com.xuannie.hdbcarpark.ui.theme.Grey900
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 // Enum Class for App Routes
 enum class HdbCarparkScreen(@StringRes val title: Int) {
     Default(title = R.string.app_name),
+
+}
+
+/**
+ * Composable that displays the topBar and displays a navigation menu
+ */
+@Composable
+fun HdbAppTopBar(
+    modifier: Modifier = Modifier,
+    currentScreen: HdbCarparkScreen,
+    scope: CoroutineScope,
+    scaffoldState: ScaffoldState
+) {
+    // TODO Add a Logo Next Time
+    TopAppBar(
+        title = { Text(stringResource(id = currentScreen.title)) },
+        modifier = modifier,
+        navigationIcon =  {
+            IconButton(onClick = {
+                scope.launch { scaffoldState.drawerState.open() }
+            }) {
+                Icon(
+                    imageVector = Icons.Filled.Menu,
+                    contentDescription = stringResource(R.string.navbar_desc)
+                )
+            }
+        },
+        elevation = 20.dp
+    )
+}
+
+@Composable
+fun HdbNavigationDrawer(
+    modifier: Modifier = Modifier,
+    scope: CoroutineScope,
+    navController: NavHostController,
+    scaffoldState: ScaffoldState,
+) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+
+    ) {
+        // Headline Description
+        // TODO Change with App Logo
+        Row(
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Image(
+                imageVector = Icons.TwoTone.Home,
+                contentDescription = null,
+                modifier = modifier
+                    .weight(1f)
+            )
+
+            Spacer(modifier = modifier.weight(5f))
+
+            // Icon to close the Navigation Drawer
+            IconButton(
+                onClick = {
+                    scope.launch { scaffoldState.drawerState.close() }
+                },
+                modifier = modifier.weight(1f)
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Close,
+                    contentDescription = stringResource(R.string.menu_desc)
+                )
+
+            }
+        }
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Text(
+            text = stringResource(id = R.string.app_name),
+            style = MaterialTheme.typography.h6,
+            modifier = modifier.padding(
+                start = 5.dp,
+                end = 5.dp,
+                top = 5.dp,
+                bottom = 1.dp
+            )
+        )
+
+        Spacer(modifier = Modifier.height(5.dp))
+
+        Divider(
+            thickness = 2.dp,
+            color = Grey900,
+            modifier = modifier.padding(2.dp)
+        )
+
+        /**
+         *  Navigation Options / Buttons
+         */
+
+        /**
+         *  Navigation Options / Buttons
+         */
+        // Home
+        Button(
+            onClick = {
+                // Navigate to the Desired Route
+                navController.navigate(HdbCarparkScreen.Default.name)
+                // Close the App Drawer
+                scope.launch { scaffoldState.drawerState.close() }
+            },
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(all = 5.dp)
+        ) {
+            Image(
+                imageVector = Icons.Filled.Home,
+                contentDescription = null,
+                )
+            Text(stringResource(R.string.home_nav_desc))
+        }
+//
+//        // Search
+//        Button(
+//            onClick = {
+//                navController.navigate(BusExpressScreen.Search.name)
+//                scope.launch { scaffoldState.drawerState.close() }
+//            },
+//            modifier = modifier
+//                .fillMaxWidth()
+//                .padding(all = 5.dp)
+//        ) {
+//            Image(
+//                imageVector = Icons.Filled.Search,
+//                contentDescription = stringResource(R.string.search_nav_desc)
+//            )
+//            Text(stringResource(id = R.string.search_nav_desc))
+//        }
+//
+//        // Favourites
+//        Button(
+//            onClick = {
+//                favouriteBusStopViewModel.determineOutAndBack(
+//                    goingOutFavouriteUiState = goingOutFavouriteUiState,
+//                )
+//                navController.navigate(BusExpressScreen.Favourites.name)
+//                scope.launch { scaffoldState.drawerState.close() }
+//            },
+//            modifier = modifier
+//                .fillMaxWidth()
+//                .padding(all = 5.dp)
+//        ) {
+//            Image(
+//                imageVector = Icons.Filled.Favorite,
+//                contentDescription = null
+//            )
+//            Text(stringResource(R.string.favourites_navigation_desc))
+//        }
+
+        /**
+         * Nearby is hidden as not built yet so can release the app
+         */
+
+        /**
+         * Nearby is hidden as not built yet so can release the app
+         */
+
+    }
 
 }
 
@@ -26,10 +204,11 @@ fun HdbCarparkApp(
     // Save Current Back Stack Entry
     val backStackEntry by navController.currentBackStackEntryAsState()
     // Name of Current Screen as a Variable
-    val currentScreen = BusExpressScreen.valueOf(
-        backStackEntry?.destination?.route ?: BusExpressScreen.Default.name
+    val currentScreen = HdbCarparkScreen.valueOf(
+        backStackEntry?.destination?.route ?: HdbCarparkScreen.Default.name
     )
     val scaffoldState = rememberScaffoldState()
+    val scope = rememberCoroutineScope()
 
     // Top Navigation Bar
     Scaffold(
@@ -37,77 +216,37 @@ fun HdbCarparkApp(
         scaffoldState = scaffoldState,
         drawerContent = {
             // TODO Add a Composable for Navigation
-
+            HdbNavigationDrawer(
+                scope = scope,
+                navController = navController,
+                scaffoldState = scaffoldState
+            )
         },
         drawerElevation = 20.dp,
-        drawerShape = NavigationDrawer,
+//        drawerShape = NavigationDrawer,
         drawerGesturesEnabled = true,
         topBar = {
             // Top App Bar TODO
+            HdbAppTopBar(
+                currentScreen = currentScreen,
+                scope = scope,
+                scaffoldState = scaffoldState
             )
+
         }
     ) { innerPadding ->
-        // For Small Menu Popup
-        val menuSelection = remember { mutableStateOf(MenuSelection.NONE) }
-
-        // State Variables
-        val busServiceBoolUiState = appViewModel.busServiceBoolUiState
 
         // NavHost Composable for Navigating between Screens
         NavHost(
             navController = navController,
-            startDestination = BusExpressScreen.Default.name,
+            startDestination = HdbCarparkScreen.Default.name,
             modifier = modifier.padding(innerPadding)
         ) {
             // Routes for Every Screen in the App
 
-            // 1. Default Screen (For Nearby Bus-stops)
-            composable(route = BusExpressScreen.Default.name) {
+            // 1. Default Screen
+            composable(route = HdbCarparkScreen.Default.name) {
                 DefaultScreen(navController = navController)
-            }
-
-            // 2. Search Screen
-            composable(route = BusExpressScreen.Search.name) {
-                SearchScreen(
-                    busUiState = appViewModel.busUiState,
-                    busArrivalsJson = SingaporeBus(
-                        metaData = busServiceUiState.metaData,
-                        busStopCode = busServiceUiState.busStopCode,
-                        services = busServiceUiState.services
-                    ),
-                    busStopDetails = BusStopValue(
-                        busStopCode = busStopNameUiState.busStopCode,
-                        busStopRoadName = busStopNameUiState.busStopRoadName,
-                        busStopDescription = busStopNameUiState.busStopDescription,
-                        latitude = busStopNameUiState.latitude,
-                        longitude = busStopNameUiState.longitude
-                    ),
-                    busRoutes = BusRoutes(
-                        metaData = busRouteUiState.metaData,
-                        busRouteArray = busRouteUiState.busRouteArray
-                    ),
-                    busServiceBool = busServiceBoolUiState,
-                    viewModel = appViewModel,
-                    busServicesRouteList = multipleBusUiState,
-                    currentScreen = currentScreen,
-                    favouriteBusStopViewModel = favouriteBusStopViewModel,
-                    menuSelection = menuSelection,
-                )
-            }
-
-            // 3. Nearby Screen
-            composable(route = BusExpressScreen.Nearby.name) {
-                NearbyScreen(
-                )
-            }
-
-            // 3. Favourites [Going Out]
-            composable(route = BusExpressScreen.Favourites.name) {
-                FavouritesScreen(
-                    favouriteBusStopViewModel = favouriteBusStopViewModel,
-                    busStopsInFavourites = busStopsInFavourites,
-                    appViewModel = appViewModel
-                )
             }
 
 
