@@ -12,4 +12,5 @@
     <string name="john">John Lim</string>
     <string name="points">\"Points: \"</string>
     <string name="fault_reporting_flavour">Report a Fault</string>
+    <string name="success_screen_desc">Success</string>
 </resources>

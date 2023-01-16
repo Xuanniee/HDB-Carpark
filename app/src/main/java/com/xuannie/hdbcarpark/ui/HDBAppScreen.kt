@@ -29,7 +29,8 @@ enum class HdbCarparkScreen(@StringRes val title: Int) {
     Default(title = R.string.app_name),
     Login(title = R.string.Login),
     ParkingAvail(title = R.string.carpark_avail_title),
-    FaultReporting(title = R.string.fault_reporting_flavour)
+    FaultReporting(title = R.string.fault_reporting_flavour),
+    Submission(title = R.string.success_screen_desc)
 }
 
 /**
@@ -47,12 +48,22 @@ fun HdbAppTopBar(
         title = { Text(stringResource(id = currentScreen.title)) },
         modifier = modifier,
         navigationIcon =  {
-            IconButton(onClick = {
-                scope.launch { scaffoldState.drawerState.open() }
+            if (currentScreen != HdbCarparkScreen.Login) {
+                IconButton(onClick = {
+                    scope.launch { scaffoldState.drawerState.open() }
+                }) {
+                    Icon(
+                        imageVector = Icons.Filled.Menu,
+                        contentDescription = stringResource(R.string.navbar_desc)
+                    )
+                }
+            }
+            else IconButton(onClick = {
+                // TODO Does nothing
             }) {
                 Icon(
-                    imageVector = Icons.Filled.Menu,
-                    contentDescription = stringResource(R.string.navbar_desc)
+                    imageVector = Icons.Filled.CarRepair,
+                    contentDescription = null
                 )
             }
         },
@@ -255,13 +266,14 @@ fun HdbCarparkApp(
         modifier = modifier,
         scaffoldState = scaffoldState,
         drawerContent = {
-            // TODO Add a Composable for Navigation
-            viewModel.determineUserQuery("Test")
-            HdbNavigationDrawer(
-                scope = scope,
-                navController = navController,
-                scaffoldState = scaffoldState
-            )
+            if (currentScreen != HdbCarparkScreen.Login) {
+                viewModel.determineUserQuery("Test")
+                HdbNavigationDrawer(
+                    scope = scope,
+                    navController = navController,
+                    scaffoldState = scaffoldState
+                )
+            }
         },
         drawerElevation = 20.dp,
 //        drawerShape = NavigationDrawer,
@@ -303,7 +315,11 @@ fun HdbCarparkApp(
             }
 
             composable(route = HdbCarparkScreen.FaultReporting.name) {
-                FaultReportingChecklist()
+                FaultReportingChecklist(navController = navController)
+            }
+
+            composable(route = HdbCarparkScreen.Submission.name) {
+                SubmissionScreen(navController = navController)
             }
 
 
