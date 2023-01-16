@@ -7,4 +7,5 @@
     <string name="login_pw_title">Password</string>
     <string name="singpass_login_desc">Log in using Singpass.</string>
     <string name="Login">Login</string>
+    <string name="carpark_avail_title">Carpark Availability</string>
 </resources>

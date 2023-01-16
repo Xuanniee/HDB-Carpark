@@ -21,6 +21,7 @@ import androidx.navigation.compose.rememberNavController
 import com.xuannie.hdbcarpark.R
 import com.xuannie.hdbcarpark.ui.screens.DefaultScreen
 import com.xuannie.hdbcarpark.ui.screens.LoginScreen
+import com.xuannie.hdbcarpark.ui.screens.ParkingSlotScreen
 import com.xuannie.hdbcarpark.ui.theme.Grey900
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -28,7 +29,8 @@ import kotlinx.coroutines.launch
 // Enum Class for App Routes
 enum class HdbCarparkScreen(@StringRes val title: Int) {
     Default(title = R.string.app_name),
-    Login(title = R.string.Login)
+    Login(title = R.string.Login),
+    ParkingAvail(title = R.string.carpark_avail_title)
 }
 
 /**
@@ -147,6 +149,24 @@ fun HdbNavigationDrawer(
                 )
             Text(stringResource(R.string.home_nav_desc))
         }
+        // Parking Avail
+        Button(
+            onClick = {
+                // Navigate to the Desired Route
+                navController.navigate(HdbCarparkScreen.ParkingAvail.name)
+                // Close the App Drawer
+                scope.launch { scaffoldState.drawerState.close() }
+            },
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(all = 5.dp)
+        ) {
+            Image(
+                imageVector = Icons.Filled.Home,
+                contentDescription = null,
+            )
+            Text("Parking Availability")
+        }
 //
 //        // Search
 //        Button(
@@ -252,6 +272,14 @@ fun HdbCarparkApp(
             // 2. Default Screen
             composable(route = HdbCarparkScreen.Default.name) {
                 DefaultScreen(navController = navController)
+            }
+            //ParkingSlot Screen
+            composable(route = HdbCarparkScreen.ParkingAvail.name){
+                ParkingSlotScreen(
+                    currentScreen = currentScreen,
+                    scope = scope,
+                    scaffoldState = scaffoldState
+                )
             }
 
 
