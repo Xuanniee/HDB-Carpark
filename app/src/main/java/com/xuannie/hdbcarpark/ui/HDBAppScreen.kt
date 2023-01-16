@@ -29,6 +29,7 @@ enum class HdbCarparkScreen(@StringRes val title: Int) {
     Default(title = R.string.app_name),
     Login(title = R.string.Login),
     ParkingAvail(title = R.string.carpark_avail_title),
+    FaultReporting(title = R.string.fault_reporting_flavour),
     carparkLocator(title = R.string.carpark_locator_desc),
 }
 
@@ -320,6 +321,10 @@ fun HdbCarparkApp(
             }
             composable(route = HdbCarparkScreen.carparkLocator.name) {
                 MapboxScreen()
+            }
+
+            composable(route = HdbCarparkScreen.FaultReporting.name) {
+                FaultReportingChecklist()
             }
 
 
