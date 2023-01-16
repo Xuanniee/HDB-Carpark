@@ -30,7 +30,7 @@ enum class HdbCarparkScreen(@StringRes val title: Int) {
     Login(title = R.string.Login),
     ParkingAvail(title = R.string.carpark_avail_title),
     FaultReporting(title = R.string.fault_reporting_flavour),
-    Submission(title = R.string.success_screen_desc)
+    Submission(title = R.string.success_screen_desc),
     carparkLocator(title = R.string.carpark_locator_desc),
 }
 
