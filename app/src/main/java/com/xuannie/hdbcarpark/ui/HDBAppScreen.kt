@@ -147,6 +147,25 @@ fun HdbNavigationDrawer(
                 )
             Text(stringResource(R.string.home_nav_desc))
         }
+
+        Spacer(modifier = Modifier.weight(1f))
+
+            Button(
+                onClick = {
+                    // Navigate to the Desired Route
+                    navController.navigate(HdbCarparkScreen.Login.name)
+                    // Close the App Drawer
+                    scope.launch { scaffoldState.drawerState.close() }
+                },
+                modifier = modifier
+                    .fillMaxWidth()
+                    .padding(all = 5.dp)
+            ) {
+                Text(text = "Log Out")
+            }
+
+
+
 //
 //        // Search
 //        Button(
